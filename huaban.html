@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	canvas{
+		border: 1px solid #000;
+	}
+</style>
+<body>
+	<canvas width="300" height="400">
+		替换内容
+	</canvas>
+	<canvas class="canvas3" width="300" height="300"> </canvas>
+	<canvas class="canvas4" width="300" height="300"> </canvas>
+</body>
+</html>
+<script>
+	 let canvas = document.querySelector('canvas');
+        console.dir(canvas);
+        let ctx = canvas.getContext('2d');   
+        let PI = Math.PI;
+
+        for(let i=0;i<4;i++){
+        	for(let j=0;j<3;j++){
+        		let x=(j+1)*10+(2*j+1)*40,
+        			y=(i+1)*10+(2*i+1)*40,
+        		color=`rgb(${255-85*i},${255-85*j},0)`; 
+        		let angle = i % 2==0?false:true;
+
+        		ctx.arc(x,y,40,0,PI+PI/2*j,angle);
+                if(i>1){
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                }
+                ctx.stroke();
+                ctx.beginPath();
+
+        	}
+        }
+        
+        
+        
+  let canvas3 = document.querySelector('.canvas3');
+        let ctx2 = canvas3.getContext('2d');
+        function sum(num){
+            let r = 100;
+            let deg = 2*PI/num;
+            ctx2.beginPath();
+            ctx2.moveTo(150 + r,150);
+            for(let i = 0;i < num;i++){
+                let x = 150 + r*Math.cos(deg*i);
+                let y = 150 + r*Math.sin(deg*i);
+                ctx2.lineTo(x,y);
+            }
+            ctx2.closePath();
+            ctx2.strokeStyle = 'red'
+            ctx2.stroke();
+	    }
+	sum(6)
+
+
+
+
+
+ let canvas4 = document.querySelector('.canvas4');
+        let ctx3 = canvas4.getContext('2d');
+        let a = 0;
+        let t = setInterval(function () {
+            a++;
+            let angle = 2*Math.PI/100;
+            let r = 50;
+            ctx3.clearRect(0,0,300,300);
+            ctx3.beginPath();
+            ctx3.lineWidth = 4;
+            ctx3.arc(150,150,r,0,angle*a);
+            ctx3.strokeStyle = '#EA1C27';
+            ctx3.stroke();
+            ctx3.closePath();
+            ctx3.beginPath();
+            ctx3.font = '24px/30px serif';
+            ctx3.textAlign = 'center';
+            ctx3.textBaseline= 'middle';
+            ctx3.fillStyle = '#000';
+            ctx3.fillText(`${a}`,150,150);
+            if(a == 100){
+                clearInterval(t);
+            }
+        },100);
+
+</script>
